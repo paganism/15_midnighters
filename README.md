@@ -1,19 +1,19 @@
 # Night Owls Detector
 
-Скрипт выводит пользователей devman, которые отправили задачи на проверку после 24:00 и до 06:00
+Script prints devman users, which sent task from 24:00 till 06:00
 
-# Как запустить
+# How to start
 
-Скрипт требует для своей работы установленного интерпретатора Python версии 3.5
+Python version 3.5 is required
 
-Запуск на Linux:
+Start on Linux:
 
 ```bash
 pip install -r requirements.txt # alternatively try pip3
 
 $ python3.5 seek_dev_nighters.py
 
-hoholsaniy, paganismrus, oeananas, АлексейЛескин, maxdmtrev
+hoholsaniy, paganismrus, oeananas, maxdmtrev
 
 ```
 
