@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 def load_attempts():
-    URL = 'http://devman.org/api/challenges/solution_attempts/'
+    url = 'http://devman.org/api/challenges/solution_attempts/'
     page = 1
     payload = {'page': page}
 
