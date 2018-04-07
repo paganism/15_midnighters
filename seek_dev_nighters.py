@@ -4,32 +4,32 @@ from datetime import datetime
 
 
 def load_attempts():
-    url = 'http://devman.org/api/challenges/solution_attempts/'
+    URL = 'http://devman.org/api/challenges/solution_attempts/'
     page = 1
     payload = {'page': page}
 
     while True:
-        try:
-            response = requests.get(URL, params=payload).json()
-            payload = {'page': page}
-            page += 1
-            users_attempts = response['records']
-            for attempt in users_attempts:
-                yield attempt
-        except ValueError:
+        response = requests.get(URL, params=payload).json()
+        number_of_pages = response['number_of_pages']
+        payload = {'page': page}
+        page += 1
+        users_attempts = response['records']
+        for attempt in users_attempts:
+            yield attempt
+        if page > number_of_pages:
             break
 
 
-def get_midnighters(users):
+def get_midnighters(attempts):
     midnight = 0
     morning = 6
     midnighters = []
-    for user in users:
-        user_time_zone = pytz.timezone(user['timezone'])
-        local_dt = user_time_zone.localize(
-            datetime.fromtimestamp(user['timestamp']))
+    for attempt in attempts:
+        user_time_zone = attempt['timezone']
+        user_time = datetime.fromtimestamp(attempt['timestamp'])
+        local_dt = pytz.timezone(user_time_zone).fromutc(user_time)
         if midnight < local_dt.hour < morning:
-            midnighters.append(user['username'])
+            midnighters.append(attempt['username'])
     return set(midnighters)
 
 
